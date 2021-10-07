@@ -39,17 +39,15 @@ def sudoku_solver(row, col, direction):
                 n = 0
                 break
     
-    # Forwarding mechanism
+    # Forwarding and backtracking mechanisms
     if is_valid(n, row, col):
         operative_sudoku[row][col] = n
         if col == 8:
             return sudoku_solver(row + 1, 0, 1)
         else:
             return sudoku_solver(row, col + 1, 1)
-
-    # Backtracking mechanism
-    if n == 0 and (row != 0 and col !=0):
-        operative_sudoku[row][col] = n
+    else:
+        operative_sudoku[row][col] = 0
         if col == 0:
             return sudoku_solver(row -1, 8, -1)
         else:
@@ -73,6 +71,7 @@ def is_valid(n, row, col):
         return False
     else:
         return True
+
 
  # Start row, start col, direction
 solved = sudoku_solver(0, 0, 1)
